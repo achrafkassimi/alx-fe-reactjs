@@ -9,8 +9,8 @@ import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
 import Counter from './components/Counter';
 import React from 'react';
-import ProfilePage from './ProfilePage';
-import UserContext from './UserContext';
+import ProfilePage from './components/ProfilePage';
+import UserContext from './components/UserContext';
 
 function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
@@ -18,21 +18,24 @@ function App() {
     <div className="App">
 
       <Header />
+
       <MainContent />
+
       <UserProfile
         name="Alice"
         age="25"
         bio="Loves hiking and photography"
       />
+
       <div style={{ textAlign: 'center', paddingTop: '50px' }}>
         <h1>Simple Counter Application</h1>
         <Counter />
       </div>
 
-      // Provide userData to the context
-    <UserContext.Provider value={userData}>
-      <ProfilePage />
-    </UserContext.Provider>
+      {/* Provide userData to the context */}
+      <UserContext.Provider value={userData}>
+        <ProfilePage />
+      </UserContext.Provider>
 
 
       <WelcomeMessage />
