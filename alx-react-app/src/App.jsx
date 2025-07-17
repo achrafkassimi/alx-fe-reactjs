@@ -50,6 +50,7 @@ function App() {
         age="25"
         bio="Loves hiking and photography"
       />
+      <WelcomeMessage />
       <Footer />
     </div>
   );
