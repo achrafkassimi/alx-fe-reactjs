@@ -3,6 +3,15 @@ import { create } from 'zustand';
 
 export const useRecipeStore = create((set) => ({
   recipes: [],
+  filteredRecipes: [], // Filtered recipes based on search term
+  favorites: [], // List of favorite recipe IDs
+  recommendations: [], // List of recommended recipes
+
+    // Debugging helper to log state changes
+  debugState: () => {
+      console.log("Current State:", get());
+  },
+
   addRecipe: (newRecipe) =>
     set((state) => ({
       recipes: [...state.recipes, newRecipe],
@@ -23,12 +32,51 @@ export const useRecipeStore = create((set) => ({
   // recipes: [],  // All recipes
   searchTerm: '', // Search term to filter recipes
   setSearchTerm: (term) => set({ searchTerm: term }), // Action to update search term
-  filteredRecipes: [], // Filtered recipes based on search term
+
   filterRecipes: () => 
     set((state) => ({
       filteredRecipes: state.recipes.filter((recipe) =>
         recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
       ),
     })),
-  setRecipes: (recipes) => set({ recipes }),
+
+  
+  addFavorite: (recipeId) => {
+    set((state) => {
+      const updatedFavorites = [...state.favorites, recipeId];
+      console.log("Adding to favorites:", updatedFavorites); // Log when adding
+      return { favorites: updatedFavorites };
+    });
+  },
+
+  removeFavorite: (recipeId) => {
+    set((state) => {
+      const updatedFavorites = state.favorites.filter(id => id !== recipeId);
+      console.log("Removing from favorites:", updatedFavorites); // Log when removing
+      return { favorites: updatedFavorites };
+    });
+  },
+
+  // Only generate recommendations when favorites change
+  generateRecommendations: () => {
+    const state = get();
+    if (state.favorites.length === 0) {
+      console.log("No favorites to generate recommendations.");
+      return;
+    }
+    
+    const recommended = state.recipes.filter((recipe) =>
+      state.favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+    console.log("Generated recommendations:", recommended); // Log recommendations
+    set({ recommendations: recommended });
+  },
+
+  // setRecipes: (recipes) => set({ recipes }),
+
+  setRecipes: (recipes) => {
+    console.log("Setting recipes:", recipes); // Log when setting recipes
+    set({ recipes });
+  },
+
 }));
