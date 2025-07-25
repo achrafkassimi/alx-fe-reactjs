@@ -15,4 +15,6 @@ If you are developing a production application, we recommend using TypeScript wi
 - npm create vite@latest recipe-sharing-app -- --template react
 - cd recipe-sharing-app
 - npm install zustand
+- npm install react-router-dom
+
 
