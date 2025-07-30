@@ -7,9 +7,13 @@ import Search from './components/Search';
 
 const App = () => {
   return (
-    <div className="app-container">
-      <h1>GitHub User Search</h1>
-      <Search />
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-blue-700 text-white p-4 text-center text-xl font-bold shadow">
+        GitHub User Search
+      </header>
+      <main>
+        <Search />
+      </main>
     </div>
   );
 };
