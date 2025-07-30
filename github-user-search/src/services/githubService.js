@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 // githubService.js 1
-export const fetchUserData = async (username) => {
+export const fetchUserData1 = async (username) => {
   const response = await axios.get(`https://api.github.com/users/${username}`);
   console.log(response.data);
   return response.data;
 };
 
 // githubService.js 2
-export const fetchAdvancedUserSearch = async (username, location, minRepos) => {
+export const fetchUserData = async (username, location, minRepos) => {
   let query = '';
 
   if (username) query += `${username} `;
