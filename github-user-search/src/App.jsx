@@ -2,8 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { Analytics } from '@vercel/analytics/next';
-
 import Search from './components/Search';
 
 const App = () => {
@@ -15,7 +13,6 @@ const App = () => {
       <main>
         <Search />
       </main>
-      <Analytics />
     </div>
   );
 };
