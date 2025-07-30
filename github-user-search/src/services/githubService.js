@@ -3,7 +3,7 @@ import axios from 'axios';
 // githubService.js 1
 export const fetchUserData1 = async (username) => {
   const response = await axios.get(`https://api.github.com/users/${username}`);
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 
@@ -17,7 +17,7 @@ export const fetchUserData = async (username, location, minRepos) => {
 
   const url = `https://api.github.com/search/users?q=${encodeURIComponent(query.trim())}`;
   const response = await axios.get(url);
-  console.log(response);
+  // console.log(response);
 
 
   return response.data.items;
