@@ -29,7 +29,7 @@ function App() {
         </p>
       </div>
 
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
         <UserProfile />
       </div>
       
