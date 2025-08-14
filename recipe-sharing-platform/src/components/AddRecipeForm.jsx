@@ -5,44 +5,73 @@ const AddRecipeForm = ({ addRecipe }) => {
   // Define state for each form field
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [steps, setSteps] = useState('');  // Changed to `steps`
-  const [error, setError] = useState('');
+  const [steps, setSteps] = useState('');
+  
+  // Errors state for storing validation errors
+  const [errors, setErrors] = useState({
+    title: '',
+    ingredients: '',
+    steps: '',
+  });
+
+  // Validation function
+  const validate = () => {
+    const newErrors = {};
+    
+    // Validate Title
+    if (!title) {
+      newErrors.title = 'Title is required';
+    }
+    
+    // Validate Ingredients
+    if (!ingredients) {
+      newErrors.ingredients = 'Ingredients are required';
+    } else {
+      const ingredientsList = ingredients.split(',').map(item => item.trim());
+      if (ingredientsList.length < 2) {
+        newErrors.ingredients = 'Please provide at least two ingredients';
+      }
+    }
+
+    // Validate Steps
+    if (!steps) {
+      newErrors.steps = 'Preparation steps are required';
+    }
+
+    // Update errors state
+    setErrors(newErrors);
+    
+    // If no errors, return true, else false
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Validate form inputs
-    if (!title || !ingredients || !steps) {  // Using `steps` here
-      setError('All fields are required.');
-      return;
+
+    // Validate the form before submitting
+    if (validate()) {
+      // Split ingredients into an array
+      const ingredientsList = ingredients.split(',').map(item => item.trim());
+
+      // Add the new recipe
+      addRecipe({ title, ingredients: ingredientsList, steps });
+
+      // Reset form and errors
+      setTitle('');
+      setIngredients('');
+      setSteps('');
+      setErrors({
+        title: '',
+        ingredients: '',
+        steps: '',
+      });
     }
-
-    // Split ingredients into an array
-    const ingredientsList = ingredients.split(',').map((item) => item.trim());
-
-    // Check if ingredients have at least two items
-    if (ingredientsList.length < 2) {
-      setError('Please include at least two ingredients.');
-      return;
-    }
-
-    // Add the new recipe
-    addRecipe({ title, ingredients: ingredientsList, steps });  // Using `steps` here
-
-    // Clear the form after submission
-    setTitle('');
-    setIngredients('');
-    setSteps('');  // Reset `steps` here
-    setError('');
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-semibold mb-6 text-center">Add New Recipe</h2>
-
-      {/* Error message */}
-      {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         {/* Title Input */}
@@ -54,8 +83,8 @@ const AddRecipeForm = ({ addRecipe }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
           />
+          {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
         </div>
 
         {/* Ingredients Input */}
@@ -68,22 +97,22 @@ const AddRecipeForm = ({ addRecipe }) => {
             rows="4"
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="e.g., flour, sugar, butter, eggs"
-            required
           />
+          {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
 
         {/* Preparation Steps Input */}
         <div className="mb-4">
           <label htmlFor="steps" className="block text-sm font-medium text-gray-700">Preparation Steps</label>
           <textarea
-            id="steps"  // Changed id to `steps`
-            value={steps}  // Changed to `steps`
-            onChange={(e) => setSteps(e.target.value)}  // Changed to `steps`
+            id="steps"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             rows="6"
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Step-by-step instructions"
-            required
           />
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
 
         {/* Submit Button */}
