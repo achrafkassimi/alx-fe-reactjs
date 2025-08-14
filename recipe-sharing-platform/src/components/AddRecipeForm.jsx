@@ -5,7 +5,7 @@ const AddRecipeForm = ({ addRecipe }) => {
   // Define state for each form field
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
-  const [instructions, setInstructions] = useState('');
+  const [steps, setSteps] = useState('');  // Changed to `steps`
   const [error, setError] = useState('');
 
   // Handle form submission
@@ -13,7 +13,7 @@ const AddRecipeForm = ({ addRecipe }) => {
     e.preventDefault();
     
     // Validate form inputs
-    if (!title || !ingredients || !instructions) {
+    if (!title || !ingredients || !steps) {  // Using `steps` here
       setError('All fields are required.');
       return;
     }
@@ -28,12 +28,12 @@ const AddRecipeForm = ({ addRecipe }) => {
     }
 
     // Add the new recipe
-    addRecipe({ title, ingredients: ingredientsList, instructions });
+    addRecipe({ title, ingredients: ingredientsList, steps });  // Using `steps` here
 
     // Clear the form after submission
     setTitle('');
     setIngredients('');
-    setInstructions('');
+    setSteps('');  // Reset `steps` here
     setError('');
   };
 
@@ -72,13 +72,13 @@ const AddRecipeForm = ({ addRecipe }) => {
           />
         </div>
 
-        {/* Instructions Input */}
+        {/* Preparation Steps Input */}
         <div className="mb-4">
-          <label htmlFor="instructions" className="block text-sm font-medium text-gray-700">Preparation Steps</label>
+          <label htmlFor="steps" className="block text-sm font-medium text-gray-700">Preparation Steps</label>
           <textarea
-            id="instructions"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            id="steps"  // Changed id to `steps`
+            value={steps}  // Changed to `steps`
+            onChange={(e) => setSteps(e.target.value)}  // Changed to `steps`
             rows="6"
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Step-by-step instructions"
