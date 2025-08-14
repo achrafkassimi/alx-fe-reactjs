@@ -1,4 +1,3 @@
-// src/components/RecipeDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import recipesData from '../data.json';
@@ -40,19 +39,16 @@ const RecipeDetail = () => {
 
           <h2 className="text-2xl font-semibold mb-2">Ingredients:</h2>
           <ul className="list-disc pl-6 text-gray-700">
-            <li>Spaghetti</li>
-            <li>Eggs</li>
-            <li>Bacon</li>
-            <li>Cheese</li>
-            <li>Black Pepper</li>
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))}
           </ul>
 
           <h2 className="text-2xl font-semibold mt-6 mb-2">Cooking Instructions:</h2>
           <ol className="list-decimal pl-6 text-gray-700">
-            <li>Boil the spaghetti.</li>
-            <li>Cook the bacon until crispy.</li>
-            <li>Mix eggs and cheese, then combine with pasta.</li>
-            <li>Top with crispy bacon and black pepper.</li>
+            {recipe.instructions.map((instruction, index) => (
+              <li key={index}>{instruction}</li>
+            ))}
           </ol>
         </div>
       </div>

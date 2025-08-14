@@ -3,19 +3,58 @@
       "id": 1,
       "title": "Spaghetti Carbonara",
       "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "ingredients": [
+        "Spaghetti",
+        "Eggs",
+        "Bacon",
+        "Cheese",
+        "Black Pepper"
+      ],
+      "instructions": [
+        "Boil the spaghetti.",
+        "Cook the bacon until crispy.",
+        "Mix eggs and cheese, then combine with pasta.",
+        "Top with crispy bacon and black pepper."
+      ]
     },
     {
       "id": 2,
       "title": "Chicken Tikka Masala",
       "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "ingredients": [
+        "Chicken",
+        "Tomato",
+        "Garlic",
+        "Cream",
+        "Coriander"
+      ],
+      "instructions": [
+        "Grill the chicken until slightly charred.",
+        "Prepare the masala sauce using tomatoes, garlic, and spices.",
+        "Simmer the chicken in the sauce until fully cooked.",
+        "Finish with cream and garnish with coriander."
+      ]
     },
     {
       "id": 3,
       "title": "Beef Stroganoff",
       "summary": "Sautéed pieces of beef served in a sauce with smetana (sour cream).",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "ingredients": [
+        "Beef",
+        "Onion",
+        "Sour Cream",
+        "Mushrooms",
+        "Garlic"
+      ],
+      "instructions": [
+        "Sauté the beef and onions.",
+        "Add mushrooms and cook until tender.",
+        "Prepare the creamy sauce with sour cream and garlic.",
+        "Simmer the beef in the sauce and serve over pasta or rice."
+      ]
     }
   ]
   
