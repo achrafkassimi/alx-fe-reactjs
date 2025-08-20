@@ -1,65 +1,57 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+function RegistrationForm() {
+    const [{username, email, password}, setFormData] = useState({});
+    const [errors, setErrors] = useState([]);
 
-  const [errors, setErrors] = useState({});
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({ ...prevState, [name]: value }));
+    };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log({username, email, password});
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.username) newErrors.username = 'Username is required';
-    if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-    return newErrors;
-  };
+        const errors = [];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+        if (!username) errors.push("Username is required")
+        if (!email) errors.push("Email is required")
+        if (!password) errors.push("Password is required")
 
-    // Simulate API call
-    try {
-      console.log('Submitting:', formData);
-      // Replace with your actual API call
-    } catch (err) {
-      console.error('Registration failed:', err);
-    }
-  };
+        if (errors.length) {
+            setErrors(errors);
+            return;
+        }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Register</h2>
-      <div>
-        <label>Username:</label>
-        <input name="username" value={formData.username} onChange={handleChange} />
-        {errors.username && <p style={{ color: 'red' }}>{errors.username}</p>}
-      </div>
-      <div>
-        <label>Email:</label>
-        <input name="email" value={formData.email} onChange={handleChange} />
-        {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange} />
-        {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
-      </div>
-      <button type="submit">Register</button>
-    </form>
-  );
-};
+        setErrors('');
+        setFormData({});
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleChange}
+            />
+            <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleChange}
+            />
+            <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+            />
+            <button type="submit">Submit</button>
+            {errors.length > 0 && <ul>{errors.map(errMsg => <li>{errMsg}</li>)}</ul>}
+        </form>
+    );
+}
 
 export default RegistrationForm;
