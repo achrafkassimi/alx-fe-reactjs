@@ -1,31 +1,25 @@
-// src/App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import ProfileDetails from './pages/ProfileDetails';
-import ProfileSettings from './pages/ProfileSettings';
-import BlogPost from './pages/BlogPost';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Profile from './components/Profile';
+import BlogPost from './components/BlogPost';
+import Login from './components/Login';
+import './App.css'
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+
   return (
     <Router>
+      <nav>
+        <Link to="/profile">Profile</Link>
+      </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        
-        {/* Protected Route for Profile */}
-        <Route path="profile" element={<ProtectedRoute />}>
-          <Route index element={<Profile />} />
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
-
-        {/* Dynamic Route for Blog Post */}
-        <Route path="blog/:postId" element={<BlogPost />} />
+        <Route path='/profile/*' element={<ProtectedRoute component={<Profile />} />} />
+        <Route path='/blog/:id' element={<BlogPost />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<h2>Home</h2>} />
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
